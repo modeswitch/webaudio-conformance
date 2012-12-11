@@ -2,9 +2,9 @@
 <html class="a">
  <head>
   <title>AudioContext interface</title>
-  <script src="../../resources/testharness.js"></script>
-  <script src="../../resources/testharnessreport.js"></script>
-  <script src="../../resources/lodash.js"></script>
+  <script src="../../lib/testharness.js"></script>
+  <script src="../../lib/testharnessreport.js"></script>
+  <script src="../../lib/lodash.js"></script>
  </head>
  <body class="a">
   <div id="log"></div>
@@ -46,6 +46,10 @@ function assert_is_method(obj, name, desc) {
   assert_true("function" === typeof obj[name], desc);
 }
 
+function assert_defined(obj, desc) {
+  assert_true(undefined != obj, desc);
+}
+
 var context;
 setup(function() {
   context = new AudioContext();
@@ -53,6 +57,7 @@ setup(function() {
 
 _(attributes).forEach(function(attr) {
   test(function() {
+    assert_defined(context, "context is defined")
     assert_has_property(context, attr, "should be an attribute");
     assert_readonly(context, attr, "should be read-only");
   }, attr);
@@ -60,6 +65,7 @@ _(attributes).forEach(function(attr) {
 
 _(methods).forEach(function(method) {
   test(function() {
+    assert_defined(context, "context is defined")
     assert_is_method(context, method, "should be a method");
   }, method);  
 });

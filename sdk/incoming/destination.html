@@ -1,0 +1,33 @@
+<!doctype html>
+<html class="a">
+ <head>
+  <title>AudioContext interface</title>
+  <script src="../lib/testharness.js"></script>
+  <script src="../lib/testharnessreport.js"></script>
+  <script src="../lib/lodash.js"></script>
+ </head>
+ <body class="a">
+  <div id="log"></div>
+  <script>
+
+function assert_defined(obj, desc) {
+  assert_true(undefined != obj, desc);
+}
+
+var context;
+setup(function() {
+  context = new AudioContext();
+});
+
+test(function() {
+  assert_defined(context, "context is defined")
+
+  var destination = context.destination;
+  assert_equals(destination.numberOfInputs, 1, "should have 1 input");
+  assert_equals(destination.numberOfOutputs, 0, "should have 0 outputs");
+  assert_equals(destination.numberOfChannels, 2, "should have 2 channels by default");
+}, "destination");
+
+  </script>
+ </body>
+</html>
